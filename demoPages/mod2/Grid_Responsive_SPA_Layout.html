@@ -1,21 +1,48 @@
-<style>
-.app {
-  display: grid;
-  grid-template-areas: "sidebar content";
-  grid-template-columns: 200px 1fr;
-}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Grid Areas Demo</title>
+  <style>
+    .app {
+      display: grid;
+      grid-template-areas: 'sidebar content';
+      grid-template-columns: 200px 1fr;
+      gap: 10px;
+      padding: 10px;
+    }
 
-@media (max-width: 800px) {
-  .app {
-    grid-template-areas:
-      "content"
-      "sidebar";
-    grid-template-columns: 1fr;
-  }
-}
-</style>
+    .sidebar {
+      grid-area: sidebar;
+      background: #4ecdc4;
+      padding: 20px;
+      color: #fff;
+      border-radius: 6px;
+    }
 
-<div class="app">
-  <aside style="grid-area:sidebar; background:#eee;">Sidebar</aside>
-  <main style="grid-area:content;">Main Content</main>
-</div>
+    .content {
+      grid-area: content;
+      background: #ff6b6b;
+      padding: 20px;
+      color: #fff;
+      border-radius: 6px;
+    }
+
+    @media (max-width: 800px) {
+      .app {
+        grid-template-areas:
+          'content'
+          'sidebar';
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="app">
+    <div class="sidebar">Sidebar</div>
+    <div class="content">Content</div>
+  </div>
+</body>
+</html>
