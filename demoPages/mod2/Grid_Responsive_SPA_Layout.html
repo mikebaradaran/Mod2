@@ -1,48 +1,33 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Grid Areas Demo</title>
-  <style>
+<style>
+  .app {
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    grid-template-areas: "sidebar content";
+    gap: 10px;
+  }
+
+  .sidebar { grid-area: sidebar; background: teal; padding: 20px; color: white; }
+  .content { grid-area: content; background: tomato; padding: 20px; color: white; }
+
+  @media (max-width: 800px) {
     .app {
-      display: grid;
-      grid-template-areas: 'sidebar content';
-      grid-template-columns: 200px 1fr;
-      gap: 10px;
-      padding: 10px;
+      grid-template-columns: 1fr;
+      grid-template-areas:
+        "content"
+        "sidebar";
     }
-
-    .sidebar {
-      grid-area: sidebar;
-      background: #4ecdc4;
-      padding: 20px;
-      color: #fff;
-      border-radius: 6px;
-    }
-
-    .content {
-      grid-area: content;
-      background: #ff6b6b;
-      padding: 20px;
-      color: #fff;
-      border-radius: 6px;
-    }
-
-    @media (max-width: 800px) {
-      .app {
-        grid-template-areas:
-          'content'
-          'sidebar';
-        grid-template-columns: 1fr;
-      }
-    }
-  </style>
+  }
+</style>
 </head>
 <body>
-  <div class="app">
-    <div class="sidebar">Sidebar</div>
-    <div class="content">Content</div>
-  </div>
+
+<div class="app">
+  <div class="sidebar">Sidebar</div>
+  <div class="content">Content</div>
+</div>
+
 </body>
 </html>
