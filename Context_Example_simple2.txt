@@ -1,0 +1,51 @@
+// UserProvider.jsx
+import { createContext, useState } from "react";
+
+export const UserContext = createContext(null);
+
+export default function UserProvider({ children }) {
+  const [user, setUser] = useState({ name: "Mike", age: 21 });
+
+  const incrementAge = () => {
+    setUser(prev => ({ ...prev, age: prev.age + 1 }));
+  };
+
+  const value = { user, incrementAge };
+
+  return (
+    <UserContext.Provider value={value}>
+      {children}
+    </UserContext.Provider>
+  );
+}
+=====================================================
+
+// Header.js
+import { useContext } from "react";
+import { UserContext } from "./UserProvider";
+
+export default function Header() {
+  const { user, incrementAge } = useContext(UserContext);
+
+  return (
+    <>
+      <h1>
+        Welcome, {user.name} - you are {user.age} years old
+      </h1>
+
+      <button onClick={incrementAge}>Grow older</button>
+    </>
+  );
+}
+====================================================
+// App.jsx
+import UserProvider from "./UserProvider";
+import Header from "./Header";
+
+export default function App() {
+  return (
+    <UserProvider>
+      <Header />
+    </UserProvider>
+  );
+}

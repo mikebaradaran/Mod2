@@ -1,0 +1,46 @@
+// UserContext.js  - defines the context - is a built-in system for sharing data
+import { createContext } from "react";
+export const UserContext = createContext(null);
+-----------------------------------------------
+// UserProvider.jsx  - holds state + logic
+
+import { useState } from "react";
+import { UserContext } from "./UserContext";
+
+export default function UserProvider({ children }) {
+    const [user, setUser] = useState({
+        name: "Mike",
+        age: 21
+    });
+
+    const value = { user, setUser };
+
+    // Render whatever is inside the Provider so they can use the context.
+    return <UserContext.Provider value={value}>{children}</UserContext.Provider>;
+}
+-------------------------------------------------------------
+// Header.js
+import { useContext } from "react";
+import { UserContext } from "./UserContext";
+
+export default function Header() {
+  const { user } = useContext(UserContext);
+
+  return <h1>Welcome, {user.name} - who is {user.age} years old</h1>;
+}
+---------------------------------------------------
+// App.jsx
+import UserProvider from "./UserProvider";
+import Header from "./Header";
+import ChangeUser from "./ChangeUser";
+
+export default function App() {
+  return (
+    <UserProvider>
+      <Header />
+      <ChangeUser />
+    </UserProvider>
+  );
+}
+-------------------------------------------
+
